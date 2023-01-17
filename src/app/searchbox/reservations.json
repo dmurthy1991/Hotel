@@ -8,12 +8,12 @@
 		"roomSize": "business-suite",
 		"roomQuantity": 3
 	  },
-	  "firstName": "KLM",
+	  "firstName": "IDM",
 	  "lastName": "ENG",
-	  "email": "klm.test@klm.com",
+	  "email": "idm.test@idm.com",
 	  "phone": "9999999999",
 	  "addressStreet": {
-		"streetName": "KLM Street",
+		"streetName": "IDM Street",
 		"streetNumber": "1234"
 	  },
 	  "addressLocation": {
@@ -29,7 +29,7 @@
 		"extraBalcony"
 	  ],
 	  "payment": "cc",
-	  "note": "elm lab test",
+	  "note": "idm lab test",
 	  "tags": [
 		"hotel",
 		"booking",
@@ -48,12 +48,12 @@
 		"roomSize": "presidential-suite",
 		"roomQuantity": 2
 	  },
-	  "firstName": "KLM",
+	  "firstName": "IDM",
 	  "lastName": "PM",
-	  "email": "klm.op@klm.com",
+	  "email": "idm.op@idm.com",
 	  "phone": "123456789",
 	  "addressStreet": {
-		"streetName": "KLM",
+		"streetName": "IDM",
 		"streetNumber": "1234"
 	  },
 	  "addressLocation": {
