@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-appearance-fill
+.mat-form-field-infix{
+  display: flex !important;
+}
+.mat-form-field-infix input{
+  font-size: 20px;
+}
+.mat-sort-header-container{
+  display: flex;
+  justify-content: center;
+}
+.cdk-overlay-pane{
+  overflow: auto;
+}
+#cdk-overlay-1{
+  overflow: auto;
+}
+.mat-mdc-dialog-container .mdc-dialog__surfac{
+  padding: 20px;
+}
+.mat-mdc-dialog-surface{
+  padding: 20px;
+}

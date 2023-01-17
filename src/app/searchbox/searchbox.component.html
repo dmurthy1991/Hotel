@@ -1,0 +1,134 @@
+<mat-form-field class="abc">
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Input Name" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="stay.arrivalDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Arrival<br/>Date </th>
+      <td mat-cell *matCellDef="let row"  > {{row.stay.arrivalDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="stay.departureDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure<br/>Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.stay.departureDate}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="room.roomSize">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Room<br/>Size </th>
+      <td mat-cell *matCellDef="let row"> {{row.room.roomSize}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="room.roomQuantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Room<br/>Quantity </th>
+      <td mat-cell *matCellDef="let row"> {{row.room.roomQuantity}} </td>
+    </ng-container>
+
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addressStreet.streetName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Street<br/>Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.addressStreet.streetName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addressStreet.streetNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Street<br/>Number</th>
+      <td mat-cell *matCellDef="let row"> {{row.addressStreet.streetNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addressLocation.zipCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip<br/>Code</th>
+      <td mat-cell *matCellDef="let row"> {{row.addressLocation.zipCode}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="addressLocation.state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let row"> {{row.addressLocation.state}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="addressLocation.city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let row"> {{row.addressLocation.city}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="extras">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Extras</th>
+      <td mat-cell *matCellDef="let row"> {{row.extras}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment</th>
+      <td mat-cell *matCellDef="let row"> {{row.payment}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="note">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Note</th>
+      <td mat-cell *matCellDef="let row"> {{row.note}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tags</th>
+      <td mat-cell *matCellDef="let row"> {{row.tags}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reminder">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reminder</th>
+      <td mat-cell *matCellDef="let row"> {{row.reminder}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="newsletter">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Newsletter</th>
+      <td mat-cell *matCellDef="let row"> {{row.newsletter}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="confirm">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>confirm</th>
+      <td mat-cell *matCellDef="let row"> {{row.confirm}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+
+

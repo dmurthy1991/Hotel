@@ -1,0 +1,50 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-elevation-z8{
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  overflow-x: auto;
+}
+.abc{
+  width: 95%;
+  margin: 15px auto;
+}
+th.mat-header-cell,td.mat-cell{
+  padding: 20px;
+  text-align: center;
+}
+tr.mat-row:hover{
+  background-color: rgb(204, 198, 198);
+  color:white;
+}
+.cdk-overlay-pane{
+  overflow: auto;
+}
+#cdk-overlay-1{
+  overflow: auto;
+}
+.mat-sort-header-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mdc-data-table__cell{
+  text-align: center;
+}
+.mat-mdc-dialog-surface{
+  padding: 20px;
+}
+
