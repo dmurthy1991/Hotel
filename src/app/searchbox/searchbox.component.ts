@@ -1,18 +1,10 @@
-import {AfterViewInit, OnInit, Component, Inject, ViewChild, Input, ElementRef} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import {OnInit, Component, Inject} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, Validators, FormBuilder} from '@angular/forms';
-import {FloatLabelType} from '@angular/material/form-field';
-import reservations from './reservations.json';
-import { MatFormField } from "@angular/material/form-field";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipEditedEvent, MatChipInputEvent} from '@angular/material/chips';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { DataSource } from '@angular/cdk/collections';
-import { formatCurrency } from '@angular/common';
 
 
 export interface UserData {
@@ -42,31 +34,25 @@ export interface UserData {
   templateUrl: './searchbox.component.html',
   styleUrls: ['./searchbox.component.css']
 })
-export class SearchboxComponent implements AfterViewInit {
+export class SearchboxComponent implements OnInit  {
   [x: string]: any;
   displayedColumns: string[] = ['stay.arrivalDate', 'stay.departureDate','room.roomSize','room.roomQuantity', 'firstName','lastName', 'email','phone','addressStreet.streetName','addressStreet.streetNumber', 'addressLocation.zipCode','addressLocation.state','addressLocation.city', 'extras','payment','note','tags', 'reminder','newsletter','confirm'];
-  dataSource = new MatTableDataSource(reservations);
-
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  dataSource: any;
+  reservation: any;
 
   constructor(private dialog: MatDialog, private http: HttpClient) {}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit() {
+    this.http.get('/assets/reservations.json').subscribe((res)=> {
+      this.reservation = res;
+      this.dataSource= new MatTableDataSource(this.reservation);
+    })
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
 
@@ -77,7 +63,6 @@ export class SearchboxComponent implements AfterViewInit {
       data: row,
 
     });
-    // console.log('clicked', this.dataSource.data[1]);
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log('The dialog was closed');
       this['data'] = result;
@@ -99,35 +84,34 @@ export interface Tags {
 export class PopupComponent {
   [x: string]: any;
 
-  selected='option1';
+  selected= this.data.room.roomSize == 'business-suite' ? 'option1' : 'option2';
   checked!: true;
 
-  stayarr = new FormControl('',[Validators.required]);
-  staydep = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  firstName = new FormControl('',[Validators.required, Validators.maxLength(25)]);
-  lastName = new FormControl('',[Validators.required, Validators.maxLength(25)]);
-  zipFormControl = new FormControl('',[Validators.required]);
-  statefc = new FormControl('', [Validators.required]);
-  cityfc = new FormControl('',[Validators.required]);
-  telephone = new FormControl('', [Validators.required]);
-  streetNamefc = new FormControl('',[Validators.required]);
-  streetNumberfc = new FormControl('',[Validators.required]);
-
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto' as FloatLabelType);
-  options = this._formBuilder.group({
-    hideRequired: this.hideRequiredControl,
-    floatLabel: this.floatLabelControl,
-  });
+  stayarr = new FormControl(this.data.stay.arrivalDate,[Validators.required]);
+  staydep = new FormControl(this.data.stay.departureDate, [Validators.required]);
+  emailFormControl = new FormControl(this.data.email, [Validators.required, Validators.email]);
+  firstName = new FormControl(this.data.firstName,[Validators.required, Validators.maxLength(25)]);
+  lastName = new FormControl(this.data.lastName,[Validators.required, Validators.maxLength(25)]);
+  zipFormControl = new FormControl(this.data.addressLocation.zipCode,[Validators.required]);
+  statefc = new FormControl(this.data.addressLocation.state, [Validators.required]);
+  cityfc = new FormControl(this.data.addressLocation.city,[Validators.required]);
+  telephone = new FormControl(this.data.phone, [Validators.required]);
+  streetNamefc = new FormControl(this.data.addressStreet.streetName,[Validators.required]);
+  streetNumberfc = new FormControl(this.data.addressStreet.streetNumber,[Validators.required]);
+  extras = new FormControl(this.data.extras,[Validators.required]);
+  personalNote = new FormControl(this.data.note,[Validators.required]);
+  reminder = new FormControl(this.data.reminder,[Validators.required]);
+  newsletter = new FormControl(this.data.newsletter,[Validators.required]);
+  confirm = new FormControl(this.data.confirm,[Validators.required]);
+  payment = new FormControl(this.data.payment,[Validators.required]);
+  roomSize = new FormControl(this.selected,[Validators.required]);
+  roomQuantity = new FormControl(this.data.room.roomQuantity,[Validators.required]);
+  chipTags = new FormControl(this.data.tags,[Validators.required]);
 
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {this.data = data}
-  getFloatLabelValue(): FloatLabelType {
-    return this.floatLabelControl.value || 'auto';
-  }
 
   //tags
 

@@ -22,4 +22,6 @@
 .mat-mdc-dialog-surface{
   padding: 20px;
 }
-
+.app-title {
+  margin-left: 30px;
+}

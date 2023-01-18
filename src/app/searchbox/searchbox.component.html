@@ -3,124 +3,124 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Input Name" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+<div class="mat-elevation-z8" *ngIf="dataSource">
+  <table mat-table [dataSource]="dataSource">
 
     <!-- ID Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <th mat-header-cell *matHeaderCellDef > ID </th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
     </ng-container>
 
     <!-- Progress Column -->
     <ng-container matColumnDef="stay.arrivalDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Arrival<br/>Date </th>
+      <th mat-header-cell *matHeaderCellDef > Arrival<br/>Date </th>
       <td mat-cell *matCellDef="let row"  > {{row.stay.arrivalDate}}</td>
     </ng-container>
 
     <ng-container matColumnDef="stay.departureDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure<br/>Date </th>
+      <th mat-header-cell *matHeaderCellDef > Departure<br/>Date </th>
       <td mat-cell *matCellDef="let row"> {{row.stay.departureDate}}</td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="room.roomSize">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Room<br/>Size </th>
+      <th mat-header-cell *matHeaderCellDef > Room<br/>Size </th>
       <td mat-cell *matCellDef="let row"> {{row.room.roomSize}} </td>
     </ng-container>
 
     <ng-container matColumnDef="room.roomQuantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Room<br/>Quantity </th>
+      <th mat-header-cell *matHeaderCellDef > Room<br/>Quantity </th>
       <td mat-cell *matCellDef="let row"> {{row.room.roomQuantity}} </td>
     </ng-container>
 
     <!-- Fruit Column -->
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</th>
+      <th mat-header-cell *matHeaderCellDef >FirstName</th>
       <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
+      <th mat-header-cell *matHeaderCellDef >LastName</th>
       <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <th mat-header-cell *matHeaderCellDef >Email</th>
       <td mat-cell *matCellDef="let row"> {{row.email}} </td>
     </ng-container>
 
     <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <th mat-header-cell *matHeaderCellDef >Phone</th>
       <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
     </ng-container>
 
     <ng-container matColumnDef="addressStreet.streetName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Street<br/>Name</th>
+      <th mat-header-cell *matHeaderCellDef >Street<br/>Name</th>
       <td mat-cell *matCellDef="let row"> {{row.addressStreet.streetName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="addressStreet.streetNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Street<br/>Number</th>
+      <th mat-header-cell *matHeaderCellDef >Street<br/>Number</th>
       <td mat-cell *matCellDef="let row"> {{row.addressStreet.streetNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="addressLocation.zipCode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip<br/>Code</th>
+      <th mat-header-cell *matHeaderCellDef >Zip<br/>Code</th>
       <td mat-cell *matCellDef="let row"> {{row.addressLocation.zipCode}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="addressLocation.state">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <th mat-header-cell *matHeaderCellDef >State</th>
       <td mat-cell *matCellDef="let row"> {{row.addressLocation.state}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="addressLocation.city">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <th mat-header-cell *matHeaderCellDef >City</th>
       <td mat-cell *matCellDef="let row"> {{row.addressLocation.city}} </td>
     </ng-container>
 
     <ng-container matColumnDef="extras">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Extras</th>
+      <th mat-header-cell *matHeaderCellDef >Extras</th>
       <td mat-cell *matCellDef="let row"> {{row.extras}} </td>
     </ng-container>
 
     <ng-container matColumnDef="payment">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment</th>
+      <th mat-header-cell *matHeaderCellDef >Payment</th>
       <td mat-cell *matCellDef="let row"> {{row.payment}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="note">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Note</th>
+      <th mat-header-cell *matHeaderCellDef >Note</th>
       <td mat-cell *matCellDef="let row"> {{row.note}} </td>
     </ng-container>
 
     <ng-container matColumnDef="tags">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tags</th>
+      <th mat-header-cell *matHeaderCellDef >Tags</th>
       <td mat-cell *matCellDef="let row"> {{row.tags}} </td>
     </ng-container>
 
     <ng-container matColumnDef="reminder">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reminder</th>
+      <th mat-header-cell *matHeaderCellDef >Reminder</th>
       <td mat-cell *matCellDef="let row"> {{row.reminder}} </td>
     </ng-container>
 
     <ng-container matColumnDef="newsletter">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Newsletter</th>
+      <th mat-header-cell *matHeaderCellDef >Newsletter</th>
       <td mat-cell *matCellDef="let row"> {{row.newsletter}} </td>
     </ng-container>
 
     <ng-container matColumnDef="confirm">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>confirm</th>
+      <th mat-header-cell *matHeaderCellDef >confirm</th>
       <td mat-cell *matCellDef="let row"> {{row.confirm}} </td>
     </ng-container>
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openDialog(row)"></tr>
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
@@ -128,7 +128,6 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 
 
