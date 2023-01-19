@@ -33,5 +33,3 @@ jobs:
         with:
           target_branch: hotel-build
           build_dir: dist/hotel1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
