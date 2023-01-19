@@ -31,8 +31,8 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: gh-pages
-          build_dir: dist/weather-app
+          target_branch: hotel-build
+          build_dir: dist/hotel1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
