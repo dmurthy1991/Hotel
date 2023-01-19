@@ -42,8 +42,8 @@ export class SearchboxComponent implements OnInit  {
   constructor(private dialog: MatDialog, private getData: GetDataService) {}
 
   ngOnInit() {
-    this.dataSubscription = this.getData.getJsonData().subscribe((res)=> {
-      this.reservation = res;
+    this.dataSubscription = this.getData.getJsonData().subscribe(async(res)=> {
+      this.reservation = await res;
       this.dataSource= new MatTableDataSource(this.reservation);
     })
   }
