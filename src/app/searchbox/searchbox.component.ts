@@ -1,10 +1,8 @@
 import {OnInit, Component, Inject} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, Validators, FormBuilder} from '@angular/forms';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipEditedEvent, MatChipInputEvent} from '@angular/material/chips';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import {GetDataService} from 'src/app/get-data.service';
 
 
 export interface UserData {
@@ -35,15 +33,16 @@ export interface UserData {
   styleUrls: ['./searchbox.component.css']
 })
 export class SearchboxComponent implements OnInit  {
-  [x: string]: any;
+
   displayedColumns: string[] = ['stay.arrivalDate', 'stay.departureDate','room.roomSize','room.roomQuantity', 'firstName','lastName', 'email','phone','addressStreet.streetName','addressStreet.streetNumber', 'addressLocation.zipCode','addressLocation.state','addressLocation.city', 'extras','payment','note','tags', 'reminder','newsletter','confirm'];
   dataSource: any;
   reservation: any;
+  dataSubscription: any;
 
-  constructor(private dialog: MatDialog, private http: HttpClient) {}
+  constructor(private dialog: MatDialog, private getData: GetDataService) {}
 
   ngOnInit() {
-    this.http.get('/assets/reservations.json').subscribe((res)=> {
+    this.dataSubscription = this.getData.getJsonData().subscribe((res)=> {
       this.reservation = res;
       this.dataSource= new MatTableDataSource(this.reservation);
     })
@@ -55,26 +54,19 @@ export class SearchboxComponent implements OnInit  {
 
   }
 
-
+  
   openDialog(row: UserData): void {
 
-    const dialogRef = this.dialog.open(PopupComponent, {
-
-      data: row,
-
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed');
-      this['data'] = result;
+    this.dialog.open(PopupComponent, {
+      data: row
     });
   }
 
-}
-export interface Tags {
-  tags: string;
-}
+  ngOnDestrou() {
+    this.dataSubscription.unsubscribe();
+  }
 
-
+}
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
@@ -82,7 +74,6 @@ export interface Tags {
 })
 
 export class PopupComponent {
-  [x: string]: any;
 
   selected= this.data.room.roomSize == 'business-suite' ? 'option1' : 'option2';
   checked!: true;
@@ -111,48 +102,10 @@ export class PopupComponent {
   constructor(private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-    ) {this.data = data}
-
-  //tags
-
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  // tags: Tags[] = [DataSource.arguments.tags];
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    // Add our fruit
-    if (value) {
-      this['tags'].push({value});
+    ) {
+      this.data = data
     }
 
-    // Clear the input value
-    event.chipInput!.clear();
   }
-
-  remove(tag: Tags): void {
-    const index = this['tags'].indexOf(tag);
-
-    if (index >= 0) {
-      this['tags'].splice(index, 1);
-    }
-  }
-
-  edit(tag: Tags, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-
-    // Remove fruit if it no longer has a name
-    if (!value) {
-      this.remove(tag);
-      return;
-    }
-
-    // Edit existing fruit
-    const index = this['tags'].indexOf(tag);
-    if (index >= 0) {
-      this['tags'][index] = value;
-    }
-  }
-
-}
 
 

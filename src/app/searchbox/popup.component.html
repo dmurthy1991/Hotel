@@ -149,10 +149,7 @@
       <mat-label>Tags</mat-label>
       <mat-chip-grid #chipGrid aria-label="Enter tags" [formControl]="chipTags">
         <mat-chip-row *ngFor="let tag of chipTags.value"
-                      (removed)="remove(tag)"
-                      [editable]="true"
-                      (edited)="edit(tag, $event)"
-                      [aria-description]="'press enter to edit ' + tag">
+                     >
           {{tag}}
           <button matChipRemove [attr.aria-label]="'remove ' + tag">
             <mat-icon>cancel</mat-icon>
@@ -160,9 +157,8 @@
         </mat-chip-row>
         <input placeholder="New tag..."
                [matChipInputFor]="chipGrid"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="addOnBlur"
-               (matChipInputTokenEnd)="add($event)"/>
+              
+               />
       </mat-chip-grid>
     </mat-form-field>
 
