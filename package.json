@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "playwright test",
-    "e2e:debug": "playwright test --project chromium --headed"
+    "e2e:debug": "playwright test --project chromium --headed",
+    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
+    "build:prod": "ng build --deploy-url /hotel1/"
   },
   "private": true,
   "dependencies": {
