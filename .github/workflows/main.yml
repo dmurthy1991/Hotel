@@ -27,9 +27,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
-        with:
-          target_branch: hotel-build
-          build_dir: dist/hotel1
